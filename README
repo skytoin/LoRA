@@ -1,0 +1,47 @@
+"Low-Rank Adaptation" (LoRA) represents a form of "parameter efficient fine tuning" (PEFT) designed to fine-tune large models using 
+a minimal number of learnable parameters. This approach revolutionizes fine-tuning through several key concepts:
+
+Redefining Fine Tuning: LoRA approaches fine tuning as learning changes to parameters rather than adjusting the parameters themselves. 
+This perspective shift involves freezing the original model parameters and focusing on learning the necessary changes for improved 
+performance in specific tasks.
+
+Compression of Changes: It seeks to compress these parameter changes into a more compact representation by eliminating redundant information. 
+This step is crucial for making fine-tuning more efficient and manageable.
+
+Application of Changes: The method involves simply adding these compressed changes to the pre-trained model parameters, streamlining the fine-tuning process.
+
+Though these concepts may initially seem complex, LoRA simplifies the fine-tuning process. Traditional fine tuning involves iteratively updating model 
+parameters based on the accuracy of inferences. LoRA, however, updates the changes in model parameters rather than the parameters themselves. This subtle 
+yet significant difference makes fine-tuning more efficient in terms of data and processing, addressing the challenge of enhancing model performance 
+without the need for extensive adjustments or resources.
+
+LoRA (Low-Rank Adaptation) reimagines the concept of fine-tuning in machine learning, particularly for large language models. Unlike traditional methods 
+that adjust model parameters directly, LoRA focuses on learning changes to these parameters through a matrix factorization approach. This process is grounded 
+in the understanding that weight matrices in large language models exhibit significant linear dependence due to overparameterization—a trait beneficial in 
+pre-training but excessive for fine-tuning.
+
+The key steps in LoRA's approach are as follows:
+
+Parameter Freezing: The original parameters of the model are frozen and not updated directly
+
+Matrix Creation: Two smaller matrices are created for each weight matrix in the model. These matrices, when multiplied, match the size of the corresponding weight matrix.
+
+Calculating the Change Matrix: The input is processed through both the frozen weights and the newly created matrices, generating a change matrix.
+
+Optimization: The matrices are optimized based on the loss calculated from the combination of outputs from the frozen weights and the change matrix. This optimization is 
+more efficient due to the smaller size of the matrices compared to the full model parameters.
+
+Efficient Backpropagation: Updating these smaller matrices is faster than updating the entire set of model parameters, making LoRA quicker than traditional fine-tuning methods 
+despite involving additional operations.
+
+
+Application in Inference: For inference, the computed change matrix is added to the weights, without altering the model's inference time. LoRA also allows for scaling the impact of 
+the change matrix on the model, offering flexibility similar to techniques used in image generation.
+
+LoRA thus offers a more efficient, faster approach to fine-tuning large models, reducing the amount of information and parameters needed post pre-training, while still maintaining 
+the efficacy and speed of the model during inference.
+
+
+
+
+
